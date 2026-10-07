@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { homeHref, playUrl, type Lang } from "../_content/landing";
+import { AUTHOR, homeHref, LANDING, playUrl, type Lang } from "../_content/landing";
 import { CONTACT_EMAIL, PRIVACY } from "../_content/privacy";
 import { BrandLink } from "./Brand";
 import { Icon } from "./Icon";
@@ -126,7 +126,9 @@ export function PrivacyPage({ lang }: { lang: Lang }) {
             gap: 16,
           }}
         >
-          <span style={{ font: "var(--type-p2)", color: "var(--text-secondary)" }}>© 2026 Jejak</span>
+          <span style={{ font: "var(--type-p2)", color: "var(--text-secondary)" }}>
+            © 2026 Jejak · {LANDING[lang].madeBy} {AUTHOR}
+          </span>
           <a
             href={playUrl(lang)}
             target="_blank"

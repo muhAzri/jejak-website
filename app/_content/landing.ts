@@ -41,6 +41,7 @@ export const LANDING = {
     ctaBody: "Unduh gratis dan rekam sesi pertamamu hari ini.",
     policy: "Kebijakan Privasi",
     otherLang: "English",
+    madeBy: "Dibuat oleh",
     scr: {
       run: "Lari",
       walk: "Jalan",
@@ -100,6 +101,7 @@ export const LANDING = {
     ctaBody: "Download for free and record your first session today.",
     policy: "Privacy Policy",
     otherLang: "Bahasa Indonesia",
+    madeBy: "Made by",
     scr: {
       run: "Run",
       walk: "Walk",
@@ -122,6 +124,8 @@ export const LANDING = {
     },
   },
 } as const;
+
+export const AUTHOR = "Muhammad Azri Fatihah Susanto";
 
 export type ScreenCopy = (typeof LANDING)[Lang]["scr"];
 

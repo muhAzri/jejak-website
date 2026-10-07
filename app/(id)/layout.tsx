@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { RootShell } from "../_components/RootShell";
-import { LANDING } from "../_content/landing";
+import { AUTHOR, LANDING } from "../_content/landing";
 
 export const metadata: Metadata = {
   title: LANDING.id.metaTitle,
   description: LANDING.id.heroBody,
+  authors: [{ name: AUTHOR }],
+  creator: AUTHOR,
 };
 
 export default function IdRootLayout({ children }: { children: React.ReactNode }) {

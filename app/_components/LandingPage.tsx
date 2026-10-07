@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { homeHref, LANDING, playUrl, privacyHref, type Lang } from "../_content/landing";
+import { AUTHOR, homeHref, LANDING, playUrl, privacyHref, type Lang } from "../_content/landing";
 import { BrandLink, PlayBadge } from "./Brand";
 import { Icon, type IconName } from "./Icon";
 import { PhoneFrame } from "./PhoneFrame";
@@ -411,7 +411,9 @@ export function LandingPage({ lang }: { lang: Lang }) {
             gap: 16,
           }}
         >
-          <span style={{ font: "var(--type-p2)", color: "var(--text-secondary)" }}>© 2026 Jejak</span>
+          <span style={{ font: "var(--type-p2)", color: "var(--text-secondary)" }}>
+            © 2026 Jejak · {LANDING[lang].madeBy} {AUTHOR}
+          </span>
           <nav style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
             <Link href={privacyHref(lang)} style={{ font: "var(--type-p2-semibold)", textDecoration: "none" }}>
               {t.policy}
