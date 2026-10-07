@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { AUTHOR, homeHref, LANDING, playUrl, privacyHref, type Lang } from "../_content/landing";
 import { BrandLink, PlayBadge } from "./Brand";
 import { Icon, type IconName } from "./Icon";
+import { PLAY_APP_ID, ROUTES, SITE_NAME, SITE_URL } from "../_lib/seo";
 import { PhoneFrame } from "./PhoneFrame";
 import { HomeScreen, MAP_GRID_DARK, PaceRoute, RecordingScreen } from "./PhoneScreens";
 
@@ -28,6 +29,35 @@ export function LandingPage({ lang }: { lang: Lang }) {
   const s = t.scr;
   const play = playUrl(lang);
   const otherLang: Lang = lang === "en" ? "id" : "en";
+  const pageUrl = `${SITE_URL}${ROUTES.home[lang] === "/" ? "" : ROUTES.home[lang]}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        inLanguage: ["id", "en"],
+      },
+      {
+        "@type": "MobileApplication",
+        "@id": `${SITE_URL}/#app`,
+        name: SITE_NAME,
+        description: t.heroBody,
+        url: pageUrl,
+        image: `${SITE_URL}/icon-512.png`,
+        operatingSystem: "ANDROID",
+        applicationCategory: "HealthApplication",
+        installUrl: play,
+        sameAs: [`https://play.google.com/store/apps/details?id=${PLAY_APP_ID}`],
+        inLanguage: lang,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "IDR" },
+        author: { "@type": "Person", name: AUTHOR },
+        publisher: { "@type": "Person", name: AUTHOR },
+      },
+    ],
+  };
 
   return (
     <div
@@ -39,6 +69,10 @@ export function LandingPage({ lang }: { lang: Lang }) {
         color: "var(--text-primary)",
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <header
         style={{
           position: "sticky",
