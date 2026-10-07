@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { PrivacyPage } from "../../../_components/PrivacyPage";
 import { PRIVACY } from "../../../_content/privacy";
+import { pageMetadata } from "../../../_lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  lang: "en",
+  route: "privacy",
   title: PRIVACY.en.metaTitle,
   description: PRIVACY.en.tldr,
-  alternates: { canonical: "/en/privacy", languages: { id: "/privacy", en: "/en/privacy" } },
-};
+});
 
 export default function PrivacyEn() {
   return <PrivacyPage lang="en" />;
