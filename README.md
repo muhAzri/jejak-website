@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jejak-website
 
-## Getting Started
+The landing page and privacy policy for **Jejak**, an Android app that records your runs and walks (distance, duration, pace and route) and keeps every session on your phone. No account, no server.
 
-First, run the development server:
+- App: [Jejak on Google Play](https://play.google.com/store/apps/details?id=com.muhazri.jejak)
+- Site: [jejak.zrifapps.my.id](https://jejak.zrifapps.my.id)
+
+## Pages
+
+The site is bilingual. Indonesian is the default language and English lives under `/en`.
+
+| Page           | Indonesian | English       |
+| -------------- | ---------- | ------------- |
+| Landing        | `/`        | `/en`         |
+| Privacy policy | `/privacy` | `/en/privacy` |
+
+## Tech stack
+
+- [Next.js](https://nextjs.org) 16 (App Router, `cacheComponents` enabled)
+- React 19
+- Tailwind CSS 4, loaded through Turbopack
+- TypeScript
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # production build
+npm run start   # serve the production build
+npm run lint    # eslint
+```
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+| Variable               | Default            | Purpose                                                                 |
+| ---------------------- | ------------------ | ----------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | `https://jejak.zrifapps.my.id` | Public origin used for canonical URLs, hreflang, sitemap, robots.txt and Open Graph |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set it in production if the site is served from a different domain.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
+```
+app/
+├── (id)/              Indonesian routes: /, /privacy
+├── (en)/en/           English routes: /en, /en/privacy
+├── _components/       Page components (landing, privacy, phone mockups, icons)
+├── _content/          All page copy, per language (landing.ts, privacy.ts, og.ts)
+├── _lib/
+│   ├── seo.ts         Site URL, routes and shared metadata helpers
+│   ├── og.tsx         Open Graph image renderer
+│   └── og-fonts/      Fonts bundled for OG image generation
+├── manifest.ts        Web app manifest
+├── robots.ts          robots.txt
+└── sitemap.ts         sitemap.xml with hreflang alternates
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Each language has its own route group and root layout, so `<html lang>` is correct per page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Editing copy
+
+All text lives in `app/_content/`, with one object per language (`id` and `en`). When you change copy, update both languages.
+
+- `landing.ts`: landing page text, including the copy inside the phone mockups
+- `privacy.ts`: privacy policy sections and the contact email
+- `og.ts`: short copy for the social share images
+
+If the privacy policy changes in substance, also update its effective date (`updated`) in both languages.
+
+## SEO
+
+- Canonical and hreflang links for every page
+- Open Graph and Twitter metadata
+- Generated Open Graph images per page and language (`opengraph-image.tsx`)
+- `sitemap.xml`, `robots.txt` and a web manifest
+- JSON-LD structured data (`WebSite` and `MobileApplication`) on the landing page
+
+## Author
+
+Built by [Muhammad Azri](https://github.com/muhAzri).

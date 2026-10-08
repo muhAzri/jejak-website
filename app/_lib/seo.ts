@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AUTHOR, LANDING, type Lang } from "../_content/landing";
 
 /** Public origin of the site. Set NEXT_PUBLIC_SITE_URL in production. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://jejak.app").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://jejak.zrifapps.my.id").replace(/\/$/, "");
 
 export const SITE_NAME = "Jejak";
 export const PLAY_APP_ID = "com.muhazri.jejak";
